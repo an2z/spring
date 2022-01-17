@@ -18,7 +18,7 @@ class EmptyBoxFactory {
 	}
 }
 	
-public class Generic_TargetTypes {
+class Generic_TargetTypes {
 	public static void main(String[] args) {
 //		Box2<Integer> iBox = EmptyBoxFactory.<Integer>makeBox();
 		Box2<Integer> iBox = EmptyBoxFactory.makeBox();	// 자바 7부터 제네릭 메소드의 타입인자 생략 가능
