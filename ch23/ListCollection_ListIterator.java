@@ -8,7 +8,7 @@ import java.util.ListIterator;
 
 /* 양방향 반복자 (listIterator) */
 
-class Collection_ListIterator {
+class ListCollection_ListIterator {
 	public static void main(String[] args) {
 		List<String> list = Arrays.asList("cat", "dog", "pig", "cat");
 		list = new ArrayList<>(list);

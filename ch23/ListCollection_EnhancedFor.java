@@ -5,7 +5,7 @@ import java.util.List;
 
 /* 저장된 인스턴스의 순차적 접근 방법 (enhanced for문 사용) */
 
-class Collection_EnhancedFor {
+class ListCollection_EnhancedFor {
 	public static void main(String[] args) {
 		List<String> list = new LinkedList<>();
 		

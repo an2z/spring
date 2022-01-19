@@ -6,7 +6,7 @@ import java.util.List;
 
 /* 저장된 인스턴스의 순차적 접근 방법 (반복자 사용) */
 
-class Collection_Iterator {
+class ListCollection_Iterator {
 	public static void main(String[] args) {
 		List<String> list = new LinkedList<>();
 		

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 /* list 컬렉션 클래스 (ArrayList & LikedList) */
 
-class ListCollectionClass_ArrayList {
+class ListCollection_ArrayList {
 	public static void main(String[] args) {
 		// 컬렉션 인스턴스 생성
 		List<String> list = new ArrayList<>(); 
