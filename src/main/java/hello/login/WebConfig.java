@@ -3,6 +3,7 @@ package hello.login;
 import hello.login.web.filter.LogFilter;
 import hello.login.web.filter.LoginCheckFilter;
 import hello.login.web.interceptor.LogInterceptor;
+import hello.login.web.interceptor.LoginCheckInterceptor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,13 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1) // 인터셉터는 체인으로 동작하므로, 순서를 지정
                 .addPathPatterns("/**") // 인터셉터를 적용할 url 패턴 지정
                 .excludePathPatterns("/css/**", "/*.ico", "/error"); // 인터셉터에서 제외할 url 패턴 지정
+
+        registry.addInterceptor(new LoginCheckInterceptor())
+                .order(2)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/", "/member/add", "/login", "/logout", "/css/**", "/*.ico", "/error");
     }
+
 
     /**
      * 필터 등록
