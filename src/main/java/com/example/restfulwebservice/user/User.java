@@ -1,5 +1,6 @@
 package com.example.restfulwebservice.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -18,5 +19,11 @@ public class User {
 
     @Past
     private Date joinDate;
+
+    @JsonIgnore
+    private String password;
+
+    @JsonIgnore
+    private String ssn;
 
 }
