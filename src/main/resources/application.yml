@@ -4,6 +4,9 @@ spring:
       enabled: always
   message:
     basename: messages
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 server:
   port: 8088
