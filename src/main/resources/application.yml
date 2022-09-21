@@ -11,6 +11,11 @@ spring:
     user:
       name: username
       password: Password
+  datasource:
+    url: jdbc:h2:mem:restfuldb
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: true
 
 server:
   port: 8088
