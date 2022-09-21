@@ -11,6 +11,8 @@ spring:
     user:
       name: username
       password: Password
+  datasource:
+    url: jdbc:h2:mem:restfuldb
 
 server:
   port: 8088
