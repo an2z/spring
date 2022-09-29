@@ -16,10 +16,10 @@ public class JPAMain {
 
         try {
             // 영속
-            Member member = new Member(200L, "member200");
-            em.persist(member);
+            Member findMember = em.find(Member.class, 150L);
+            findMember.setName("C");
 
-            em.flush(); // 플러시 강제 호출
+            em.detach(findMember); // 준영속
             System.out.println("==============");
 
             tx.commit();
