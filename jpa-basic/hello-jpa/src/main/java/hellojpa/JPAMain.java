@@ -16,12 +16,11 @@ public class JPAMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .getResultList();
+            // 영속
+            Member findMember1 = em.find(Member.class, 100L);
+            Member findMember2 = em.find(Member.class, 100L);
 
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+            System.out.println("result = " + (findMember1 == findMember2)); // true 보장
 
             tx.commit();
         } catch (Exception e) {
