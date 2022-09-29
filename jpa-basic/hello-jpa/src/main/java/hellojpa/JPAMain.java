@@ -19,7 +19,7 @@ public class JPAMain {
             Member findMember = em.find(Member.class, 150L);
             findMember.setName("C");
 
-            em.detach(findMember); // 준영속
+            em.clear(); // 영속성 컨텍스트 초기화
             System.out.println("==============");
 
             tx.commit();
