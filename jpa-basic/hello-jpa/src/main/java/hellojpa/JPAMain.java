@@ -15,13 +15,12 @@ public class JPAMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            // 영속
-            Member findMember = em.find(Member.class, 150L);
-            findMember.setName("C");
+            Member member = new Member();
+            member.setId(1L);
+            member.setUsername("A");
+            member.setRoleType(RoleType.USER);
 
-            em.clear(); // 영속성 컨텍스트 초기화
-            System.out.println("==============");
-
+            em.persist(member);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
