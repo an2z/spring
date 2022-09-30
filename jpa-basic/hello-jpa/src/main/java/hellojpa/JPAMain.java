@@ -16,11 +16,12 @@ public class JPAMain {
 
         try {
             Member member = new Member();
-            member.setId(1L);
             member.setUsername("A");
-            member.setRoleType(RoleType.USER);
 
+            System.out.println("============");
             em.persist(member);
+            System.out.println("============");
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
