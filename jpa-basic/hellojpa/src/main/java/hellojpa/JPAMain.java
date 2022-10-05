@@ -15,12 +15,14 @@ public class JPAMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            Member member = new Member();
-            member.setUsername("A");
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
 
-            System.out.println("============");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeamId(team.getId());
             em.persist(member);
-            System.out.println("============");
 
             tx.commit();
         } catch (Exception e) {

@@ -1,8 +1,6 @@
 package hellojpa;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -13,17 +11,11 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Member {
+public class Team {
     @Id
     @GeneratedValue
-    @Column(name = "member_id")
+    @Column(name = "team_id")
     private Long id;
 
-    @Column(name = "user_name")
-    private String username;
-
-    @Column(name = "team_id")
-    private Long teamId;
+    private String name;
 }
