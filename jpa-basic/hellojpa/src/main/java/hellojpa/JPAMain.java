@@ -35,7 +35,7 @@ public class JPAMain {
             Team findTeam = findMember.getTeam();
             System.out.println("team = " + findTeam.getName());
 
-            List<Member> members = findTeam.getMember(); // 역방향 조회
+            List<Member> members = findTeam.getMembers(); // 역방향 조회
             for (Member m : members) {
                 System.out.println("member = " + m.getUsername());
             }
