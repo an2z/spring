@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;
-import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @Entity
@@ -18,15 +17,13 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @Column(name = "member_id")
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     private LocalDateTime orderDate;
 
     @Enumerated(STRING)
     private OrderStatus status;
-
-    @ManyToOne(fetch = LAZY)
-    private Member member;
 
 }
