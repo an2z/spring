@@ -23,10 +23,8 @@ public class JPAMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team); // 연관관계 주인에 값 설정
+            member.changeTeam(team); // 연관관계 편의 메소드 사용
             em.persist(member);
-
-            team.getMember().add(member); // 연관관계 주인이 아닌 곳에도 값 설정
 
             em.flush();
             em.clear();
