@@ -25,4 +25,8 @@ public class OrderItem {
 
     private int count;
 
+    public void changeOrder(Order order) {
+        this.order = order;
+    }
+
 }
