@@ -27,9 +27,8 @@ public class Member {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @ManyToMany
-    @JoinTable(name = "member_product") // 중간 테이블
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     /**
      * 연관관계 편의 메소드
