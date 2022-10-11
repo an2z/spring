@@ -2,10 +2,9 @@ package jpabook.jpashop.domain;
 
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
+import static javax.persistence.EnumType.*;
 
 @Getter
 @Entity
@@ -21,6 +20,7 @@ public class Delivery {
 
     private String zipCode;
 
+    @Enumerated(STRING)
     private DeliveryStatus status;
 
     @OneToOne(mappedBy = "delivery")
