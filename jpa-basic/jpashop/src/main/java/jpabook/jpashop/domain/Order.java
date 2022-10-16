@@ -26,4 +26,8 @@ public class Order {
     @Enumerated(STRING)
     private OrderStatus status;
 
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
+
 }
