@@ -8,7 +8,7 @@ import static javax.persistence.EnumType.*;
 
 @Getter
 @Entity
-public class Delivery {
+public class Delivery extends BaseEntity {
 
     @Id
     @GeneratedValue
