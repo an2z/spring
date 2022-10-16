@@ -8,7 +8,9 @@ import java.util.List;
 
 @Getter
 @Entity
-public class Item {
+@DiscriminatorColumn
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Item {
 
     @Id
     @GeneratedValue
