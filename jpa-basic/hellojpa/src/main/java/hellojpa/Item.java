@@ -8,8 +8,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-//@DiscriminatorColumn // 생략 가능
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // 상속관계 매핑 (단일 테이블 전략)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) // 상속관계 매핑 (구현 클래스마다 테이블 전략)
 public class Item {
     @Id
     @GeneratedValue

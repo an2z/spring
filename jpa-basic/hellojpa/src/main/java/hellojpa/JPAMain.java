@@ -28,8 +28,8 @@ public class JPAMain {
             em.clear();
 
             // 조회
-            // 단일 테이블 전략시 조인 없이 심플한 쿼리가 나감
-            em.find(Movie.class, movie.getId());
+            // 구현 클래스마다 테이블 전략시 부모 클래스로 조회 할 경우 매우 복잡한 쿼리가 나감
+            em.find(Item.class, movie.getId());
 
             tx.commit();
         } catch (Exception e) {
