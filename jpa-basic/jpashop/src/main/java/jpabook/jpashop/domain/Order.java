@@ -10,7 +10,7 @@ import static javax.persistence.EnumType.STRING;
 @Getter
 @Entity
 @Table(name = "Orders")
-public class Order {
+public class Order extends BaseEntity {
 
     @Id
     @GeneratedValue
