@@ -24,6 +24,13 @@ public class JPAMain {
 
             em.persist(movie);
 
+            em.flush();
+            em.clear();
+
+            // 조회
+            // 단일 테이블 전략시 조인 없이 심플한 쿼리가 나감
+            em.find(Movie.class, movie.getId());
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
