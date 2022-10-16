@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
 public class JPAMain {
     public static void main(String[] args) {
@@ -16,20 +17,12 @@ public class JPAMain {
 
         try {
             // 저장
-            Movie movie = new Movie();
-            movie.setDirector("A");
-            movie.setActor("B");
-            movie.setName("영화");
-            movie.setPrice(10000);
+            Member member = new Member();
+            member.setCreatedBy("Kim");
+            member.setUsername("user1");
+            member.setCreatedDate(LocalDateTime.now());
 
-            em.persist(movie);
-
-            em.flush();
-            em.clear();
-
-            // 조회
-            // 구현 클래스마다 테이블 전략시 부모 클래스로 조회 할 경우 매우 복잡한 쿼리가 나감
-            em.find(Item.class, movie.getId());
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
