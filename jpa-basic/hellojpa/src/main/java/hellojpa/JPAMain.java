@@ -22,14 +22,16 @@ public class JPAMain {
 
             em.flush();
             em.clear();
-            
+
             // 조회
             Member proxyMember = em.getReference(Member.class, member.getId());
             System.out.println("proxyMember.class() = " + proxyMember.getClass());
 
-            em.detach(proxyMember); // 준영속 상태로 만듬
+            // 프록시 인스턴스의 초기화 여부 확인
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(proxyMember)); // 초기화 전 -> false
 
-            proxyMember.getUsername(); // 프록시 객체 초기화 실패, LazyInitializationException 에러 발생
+            proxyMember.getUsername();
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(proxyMember)); // 초기화 후 -> true
 
             tx.commit();
         } catch (Exception e) {
