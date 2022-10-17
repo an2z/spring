@@ -16,31 +16,25 @@ public class JPAMain {
 
         try {
             // 저장
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            em.persist(member1);
-
-            Member member2 = new Member();
-            member2.setUsername("member1");
-            em.persist(member2);
+            Member member = new Member();
+            member.setUsername("member");
+            em.persist(member);
 
             em.flush();
             em.clear();
             
             // 조회
-            Member findMember = em.find(Member.class, member1.getId());
-            Member proxyMember = em.getReference(Member.class, member2.getId());
-
-            System.out.println("findMember.class() = " + findMember.getClass());
+            Member proxyMember = em.getReference(Member.class, member.getId());
             System.out.println("proxyMember.class() = " + proxyMember.getClass());
 
-            // 타입 체크 시 == 비교 대신 instance of를 사용해야 한다.
-            System.out.println("findMember == proxyMember : " + (findMember == proxyMember));
-            System.out.println("findMember == proxyMember : " + (findMember instanceof Member || proxyMember instanceof Member));
+            em.detach(proxyMember); // 준영속 상태로 만듬
+
+            proxyMember.getUsername(); // 프록시 객체 초기화 실패, LazyInitializationException 에러 발생
 
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
+            System.out.println("e = " + e);
         } finally {
             em.close();
         }
