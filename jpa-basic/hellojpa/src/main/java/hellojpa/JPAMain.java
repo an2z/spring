@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
 
 public class JPAMain {
     public static void main(String[] args) {
@@ -18,11 +17,20 @@ public class JPAMain {
         try {
             // 저장
             Member member = new Member();
-            member.setCreatedBy("Kim");
-            member.setUsername("user1");
-            member.setCreatedDate(LocalDateTime.now());
+            member.setUsername("hello");
 
             em.persist(member);
+
+            em.flush();
+            em.clear();
+            
+            // 조회
+//            Member findMember = em.find(Member.class, member.getId()); // 실제 엔티티 객체 조회
+            Member findMember = em.getReference(Member.class, member.getId()); // 프록시 엔티티 객체 조회
+
+            System.out.println("findMember.class() = " + findMember.getClass());
+            System.out.println("findMember.id() = " + findMember.getId());
+            System.out.println("findMember.username() = " + findMember.getUsername());
 
             tx.commit();
         } catch (Exception e) {
