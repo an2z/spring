@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -27,11 +29,7 @@ public class JPAMain {
             Member proxyMember = em.getReference(Member.class, member.getId());
             System.out.println("proxyMember.class() = " + proxyMember.getClass());
 
-            // 프록시 인스턴스의 초기화 여부 확인
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(proxyMember)); // 초기화 전 -> false
-
-            proxyMember.getUsername();
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(proxyMember)); // 초기화 후 -> true
+            Hibernate.initialize(proxyMember); // 프록시 강제 초기화
 
             tx.commit();
         } catch (Exception e) {
