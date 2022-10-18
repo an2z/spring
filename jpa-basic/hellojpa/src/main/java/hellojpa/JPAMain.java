@@ -35,8 +35,8 @@ public class JPAMain {
             em.flush();
             em.clear();
 
-            // 즉시로딩 적용 시 JPQL에서 N+1 문제 발생
-            List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList(); //
+            // 즉시로딩 적용 시 JPQL에서 N+1 문제 발생 -> fetch join으로 해결 가능
+            List<Member> members = em.createQuery("select m from Member m join fetch m.team", Member.class).getResultList(); //
 
             tx.commit();
         } catch (Exception e) {
