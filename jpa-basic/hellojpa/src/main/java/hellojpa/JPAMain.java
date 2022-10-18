@@ -1,7 +1,9 @@
 package hellojpa;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 public class JPAMain {
     public static void main(String[] args) {
@@ -21,9 +23,7 @@ public class JPAMain {
             parent.addChild(child1);
             parent.addChild(child2);
 
-            em.persist(parent);
-            em.persist(child1);
-            em.persist(child2);
+            em.persist(parent); // 영속성 전이를 적용해 parent를 저장할 때 child도 함께 저장
 
             tx.commit();
         } catch (Exception e) {
