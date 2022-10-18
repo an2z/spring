@@ -1,9 +1,7 @@
 package hellojpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 public class JPAMain {
     public static void main(String[] args) {
@@ -16,25 +14,29 @@ public class JPAMain {
 
         try {
             // 저장
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Team teamA = new Team();
+            teamA.setName("teamA");
+            em.persist(teamA);
 
-            Member member = new Member();
-            member.setUsername("member");
-            member.setTeam(team);
-            em.persist(member);
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
+
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setTeam(teamA);
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setTeam(teamB);
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            // 조회
-            Member findMember = em.find(Member.class, member.getId());
-            System.out.println("findMember.getTeam().getClass() = " + findMember.getTeam().getClass()); // proxy
-
-            System.out.println("===============");
-            findMember.getTeam().getName(); // proxy 초기화
-            System.out.println("===============");
+            // 즉시로딩 적용 시 JPQL에서 N+1 문제 발생
+            List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList(); //
 
             tx.commit();
         } catch (Exception e) {
