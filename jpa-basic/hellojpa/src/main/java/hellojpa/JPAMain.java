@@ -23,7 +23,13 @@ public class JPAMain {
             parent.addChild(child1);
             parent.addChild(child2);
 
-            em.persist(parent); // 영속성 전이를 적용해 parent를 저장할 때 child도 함께 저장
+            em.persist(parent);
+
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0); // 고아 객체 제거
 
             tx.commit();
         } catch (Exception e) {
