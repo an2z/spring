@@ -4,7 +4,8 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
-import static javax.persistence.EnumType.*;
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @Entity
@@ -23,7 +24,7 @@ public class Delivery extends BaseEntity {
     @Enumerated(STRING)
     private DeliveryStatus status;
 
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order;
 
 }
