@@ -1,14 +1,14 @@
 package hellojpa;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
 import static lombok.AccessLevel.PROTECTED;
 
-@Data
+@Getter
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)

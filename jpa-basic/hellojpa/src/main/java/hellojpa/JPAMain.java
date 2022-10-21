@@ -22,14 +22,12 @@ public class JPAMain {
             member1.setAddress(address);
             em.persist(member1);
 
-            Address copyAddress = new Address(address.getStreet(), address.getZipcode(), address.getCity());
+            Address copyAddress = new Address(address.getStreet(), address.getZipcode(), "newCity");
 
             Member member2 = new Member();
             member1.setUsername("member2");
             member2.setAddress(copyAddress);
             em.persist(member2);
-
-            member1.getAddress().setCity("newCity");
 
             tx.commit();
         } catch (Exception e) {
