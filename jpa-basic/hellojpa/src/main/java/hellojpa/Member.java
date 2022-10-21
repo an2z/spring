@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -26,10 +25,9 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    @Embedded
+    private Period period;
 
-    private String street;
-    private String zipcode;
-    private String city;
+    @Embedded
+    private Address address;
 }
