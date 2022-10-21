@@ -18,7 +18,7 @@ public class JPAMain {
             // 저장
             Member member = new Member();
             member.setUsername("hello");
-            member.setAddress(new Address("street", "street", "city"));
+            member.setHomeAddress(new Address("street", "street", "city"));
             member.setPeriod(new Period());
 
             em.persist(member);
