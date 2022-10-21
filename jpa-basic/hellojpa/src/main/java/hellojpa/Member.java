@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -27,14 +25,18 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
+    @Embedded
+    private Period period;
 
-    /**
-     * 연관관계 편의 메소드
-     */
-    public void changeTeam(Team team) {
-        this.team = team;
-        team.getMembers().add(this);
-    }
+    @Embedded
+    @AttributeOverride(name = "street", column = @Column(name = "home_street"))
+    @AttributeOverride(name = "zipcode", column = @Column(name = "home_zipcode"))
+    @AttributeOverride(name = "city", column = @Column(name = "home_city"))
+    private Address homeAddress;
+
+    @Embedded
+    @AttributeOverride(name = "street", column = @Column(name = "work_street"))
+    @AttributeOverride(name = "zipcode", column = @Column(name = "work_zipcode"))
+    @AttributeOverride(name = "city", column = @Column(name = "work_city"))
+    private Address workAddress;
 }
