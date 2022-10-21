@@ -15,13 +15,19 @@ public class JPAMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            // 저장
-            Member member = new Member();
-            member.setUsername("hello");
-            member.setHomeAddress(new Address("street", "street", "city"));
-            member.setPeriod(new Period());
+            Address address = new Address("street", "zipcode", "city");
 
-            em.persist(member);
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setAddress(address); // 같은 값 타입 공유
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member1.setUsername("member2");
+            member2.setAddress(address); // 같은 값 타입 공유
+            em.persist(member2);
+
+            member1.getAddress().setCity("newCity"); // member2의 city까지 변경되는 side effect 발생
 
             tx.commit();
         } catch (Exception e) {
