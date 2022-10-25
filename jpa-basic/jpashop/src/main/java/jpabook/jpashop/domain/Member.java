@@ -1,9 +1,6 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Member extends BaseEntity {
@@ -15,10 +12,6 @@ public class Member extends BaseEntity {
 
     private String name;
 
-    private String city;
-
-    private String street;
-
-    private String zipcode;
-
+    @Embedded
+    private Address address;
 }
