@@ -36,16 +36,11 @@ public class JPAMain {
             System.out.println("============== START ==============");
             Member findMember = em.find(Member.class, member.getId());
 
-            // 값 타입 컬렉션도 지연 로딩 전략을 사용
-            Set<String> favoriteFoods = findMember.getFavoriteFoods();
-            for (String favoriteFood : favoriteFoods) {
-                System.out.println("favoriteFood = " + favoriteFood);
-            }
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("양념치킨");
 
-            List<Address> addressHistory = findMember.getAddressHistory();
-            for (Address address : addressHistory) {
-                System.out.println("address = " + address.getCity());
-            }
+            findMember.getAddressHistory().remove(new Address("street1", "zipcode1", "city1"));
+            findMember.getAddressHistory().add(new Address("newStreet", "newZipcode", "newCity"));
 
             tx.commit();
         } catch (Exception e) {
