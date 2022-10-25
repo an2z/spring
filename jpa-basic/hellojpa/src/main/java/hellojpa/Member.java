@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member extends BaseEntity {
+public class Member {
     @Id
     @GeneratedValue
     @Column(name = "member_id")
@@ -24,9 +24,6 @@ public class Member extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "team_id")
     private Team team;
-
-    @Embedded
-    private Period period;
 
     @Embedded
     private Address address;
