@@ -15,19 +15,17 @@ public class JPAMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            Address address = new Address("street", "zipcode", "city");
+            Member member = new Member();
+            member.setUsername("member");
+            member.setAddress(new Address("street", "zipcode", "city"));
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setAddress(address);
-            em.persist(member1);
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("피자");
 
-            Address copyAddress = new Address(address.getStreet(), address.getZipcode(), "newCity");
+            member.getAddressHistory().add(new AddressEntity("street1", "zipcode1", "city1"));
+            member.getAddressHistory().add(new AddressEntity("street2", "zipcode2", "city2"));
 
-            Member member2 = new Member();
-            member1.setUsername("member2");
-            member2.setAddress(copyAddress);
-            em.persist(member2);
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
