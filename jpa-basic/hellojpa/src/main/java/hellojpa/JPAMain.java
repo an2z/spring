@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
+import java.util.Set;
 
 public class JPAMain {
     public static void main(String[] args) {
@@ -15,19 +17,18 @@ public class JPAMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            Address address = new Address("street", "zipcode", "city");
+            Member member = new Member();
+            member.setUsername("member");
+            member.setAddress(new Address("street", "zipcode", "city"));
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setAddress(address);
-            em.persist(member1);
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("피자");
 
-            Address copyAddress = new Address(address.getStreet(), address.getZipcode(), "newCity");
+            member.getAddressHistory().add(new Address("street1", "zipcode1", "city1"));
+            member.getAddressHistory().add(new Address("street2", "zipcode2", "city2"));
 
-            Member member2 = new Member();
-            member1.setUsername("member2");
-            member2.setAddress(copyAddress);
-            em.persist(member2);
+            // 값 타입 컬렉션을 따로 persist 하지 않아도 Member 생명주기를 따라감
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
