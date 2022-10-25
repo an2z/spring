@@ -4,8 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
-import java.util.Set;
 
 public class JPAMain {
     public static void main(String[] args) {
@@ -24,23 +22,10 @@ public class JPAMain {
             member.getFavoriteFoods().add("치킨");
             member.getFavoriteFoods().add("피자");
 
-            member.getAddressHistory().add(new Address("street1", "zipcode1", "city1"));
-            member.getAddressHistory().add(new Address("street2", "zipcode2", "city2"));
+            member.getAddressHistory().add(new AddressEntity("street1", "zipcode1", "city1"));
+            member.getAddressHistory().add(new AddressEntity("street2", "zipcode2", "city2"));
 
-            // 값 타입 컬렉션을 따로 persist 하지 않아도 Member 생명주기를 따라감
             em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            System.out.println("============== START ==============");
-            Member findMember = em.find(Member.class, member.getId());
-
-            findMember.getFavoriteFoods().remove("치킨");
-            findMember.getFavoriteFoods().add("양념치킨");
-
-            findMember.getAddressHistory().remove(new Address("street1", "zipcode1", "city1"));
-            findMember.getAddressHistory().add(new Address("newStreet", "newZipcode", "newCity"));
 
             tx.commit();
         } catch (Exception e) {

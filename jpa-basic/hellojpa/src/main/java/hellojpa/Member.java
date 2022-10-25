@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 @Getter
 @Setter
@@ -39,9 +41,7 @@ public class Member {
     @Column(name = "food_name")
     private Set<String> favoriteFoods = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "address_history", joinColumns =
+    @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "member_id")
-    )
-    private List<Address> addressHistory = new ArrayList<>();
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 }
