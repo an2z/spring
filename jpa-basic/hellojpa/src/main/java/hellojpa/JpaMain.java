@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -15,17 +16,12 @@ public class JpaMain {
         tx.begin(); // 트랜잭션 시작
 
         try {
-            Member member = new Member();
-            member.setUsername("member");
-            member.setAddress(new Address("street", "zipcode", "city"));
+            String jpql = "select m from Member as m where m.username like '%kim'";
+            List<Member> result = em.createQuery(jpql, Member.class).getResultList();
 
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("피자");
-
-            member.getAddressHistory().add(new AddressEntity("street1", "zipcode1", "city1"));
-            member.getAddressHistory().add(new AddressEntity("street2", "zipcode2", "city2"));
-
-            em.persist(member);
+            for (Member member : result) {
+                System.out.println("member = " + member);
+            }
 
             tx.commit();
         } catch (Exception e) {
