@@ -4,8 +4,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
-public class JPAMain {
+public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
@@ -16,21 +17,23 @@ public class JPAMain {
 
         try {
             Member member = new Member();
-            member.setUsername("member");
-            member.setAddress(new Address("street", "zipcode", "city"));
+            member.setUsername("user");
+            em.persist(member); // 영속성 컨텍스트에 저장 (아직 db에 저장x)
 
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("피자");
+            // flush -> commit, query
+            // 쿼리를 날릴 때 자동으로 flush()를 호출 -> insert문 실행(db에 저장)
+            List<Member> result = em.createNativeQuery(
+                    "select member_id, city, street, zipcode, user_name from Member", Member.class
+            ).getResultList();
 
-            member.getAddressHistory().add(new AddressEntity("street1", "zipcode1", "city1"));
-            member.getAddressHistory().add(new AddressEntity("street2", "zipcode2", "city2"));
-
-            em.persist(member);
+            for (Member member1 : result) {
+                System.out.println("member1 = " + member1);
+            }
 
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
-            System.out.println("e = " + e);
+            e.printStackTrace();
         } finally {
             em.close();
         }
