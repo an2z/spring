@@ -18,6 +18,10 @@ public class Orders {
     @Embedded
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     public Product getProduct() {
         return product;
     }
