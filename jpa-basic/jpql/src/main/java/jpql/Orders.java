@@ -15,6 +15,9 @@ public class Orders {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @Embedded
+    private Address address;
+
     public Product getProduct() {
         return product;
     }
