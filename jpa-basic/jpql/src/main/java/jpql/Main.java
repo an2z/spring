@@ -1,7 +1,6 @@
 package jpql;
 
 import javax.persistence.*;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,19 +12,14 @@ public class Main {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("member");
-            member.setAge(10);
-            em.persist(member);
-
             /**
-             * 결과 조회 api
-             * getResultList() : 결과가 하나 이상일 때
-             * getSingleResult() : 결과가 정확히 하나일 때
+             * getResultList() 주의점
+             * 결과가 없을 경우 -> NoResultException
+             * 둘 이상일 경우 -> NonUniqueResultException
              */
             TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
             Member result = query.getSingleResult();
-            List<Member> results = query.getResultList();
+            System.out.println("result = " + result); // NoResultException
 
             tx.commit();
         } catch (Exception e) {
