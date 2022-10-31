@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,11 +19,13 @@ public class Main {
             em.persist(member);
 
             /**
-             * TypeQuery : 반환 타입이 명확할 때 사용
-             * Query : 반환 타입이 명확하지 않을 때 사용
+             * 결과 조회 api
+             * getResultList() : 결과가 하나 이상일 때
+             * getSingleResult() : 결과가 정확히 하나일 때
              */
-            TypedQuery<Member> typedQuery = em.createQuery("select m from Member m", Member.class);
-            Query query = em.createQuery("select m.username, m.age from Member m");
+            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
+            Member result = query.getSingleResult();
+            List<Member> results = query.getResultList();
 
             tx.commit();
         } catch (Exception e) {
