@@ -12,14 +12,17 @@ public class Main {
         tx.begin();
 
         try {
-            /**
-             * getResultList() 주의점
-             * 결과가 없을 경우 -> NoResultException
-             * 둘 이상일 경우 -> NonUniqueResultException
-             */
-            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
-            Member result = query.getSingleResult();
-            System.out.println("result = " + result); // NoResultException
+            Member member = new Member();
+            member.setUsername("member");
+            member.setAge(10);
+            em.persist(member);
+
+            // 파라미터 바인딩 (이름 기)
+            Member result = em.createQuery("select m from Member m where m.username = :username", Member.class)
+                    .setParameter("username", "member")
+                    .getSingleResult();
+
+            System.out.println("result.username = " + result.getUsername());
 
             tx.commit();
         } catch (Exception e) {
