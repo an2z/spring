@@ -1,9 +1,6 @@
 package jpql;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,7 +14,15 @@ public class Main {
         try {
             Member member = new Member();
             member.setUsername("member");
+            member.setAge(10);
             em.persist(member);
+
+            /**
+             * TypeQuery : 반환 타입이 명확할 때 사용
+             * Query : 반환 타입이 명확하지 않을 때 사용
+             */
+            TypedQuery<Member> typedQuery = em.createQuery("select m from Member m", Member.class);
+            Query query = em.createQuery("select m.username, m.age from Member m");
 
             tx.commit();
         } catch (Exception e) {
