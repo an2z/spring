@@ -18,13 +18,9 @@ public class Main {
             em.persist(member);
 
             /**
-             * 엔티티 프로젝션
+             * 임베디드 프로젝션
              */
-            em.createQuery("select m from Member m", Member.class).getResultList();
-
-            // join이 일어나는 경우 jpql에서도 join 키워드를 명시하는 방법을 권장한다.
-            em.createQuery("select m.team from Member m", Team.class).getResultList(); // 권장 x
-            em.createQuery("select t from Member m join m.team", Team.class).getResultList(); // 권장 o
+            em.createQuery("select o.address from Order o", Address.class).getResultList();
 
             tx.commit();
         } catch (Exception e) {
