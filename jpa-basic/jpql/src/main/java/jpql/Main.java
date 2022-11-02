@@ -17,12 +17,14 @@ public class Main {
             member.setAge(10);
             em.persist(member);
 
-            // 파라미터 바인딩 (이름 기)
-            Member result = em.createQuery("select m from Member m where m.username = :username", Member.class)
-                    .setParameter("username", "member")
-                    .getSingleResult();
+            /**
+             * 엔티티 프로젝션
+             */
+            em.createQuery("select m from Member m", Member.class).getResultList();
 
-            System.out.println("result.username = " + result.getUsername());
+            // join이 일어나는 경우 jpql에서도 join 키워드를 명시하는 방법을 권장한다.
+            em.createQuery("select m.team from Member m", Team.class).getResultList(); // 권장 x
+            em.createQuery("select t from Member m join m.team", Team.class).getResultList(); // 권장 o
 
             tx.commit();
         } catch (Exception e) {
