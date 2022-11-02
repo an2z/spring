@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,11 +20,14 @@ public class Main {
 
             /**
              * 스칼라 타입 프로젝션
+             * 여러 값을 조회하는 방법 → new 명령어로 조회
              */
-            em.createQuery("select m.username, m.age from Member m").getResultList();
+            List<MemberDto> resultList = em.createQuery("select new jpql.MemberDto(m.username, m.age) from Member m", MemberDto.class)
+                    .getResultList();
 
-            // distinct 키워드를 사용해 중복을 제거할 수 있다.
-            em.createQuery("select distinct m.username, m.age from Member m").getResultList();
+            MemberDto memberDto = resultList.get(0);
+            System.out.println("username = " + memberDto.getUsername());
+            System.out.println("age = " + memberDto.getAge());
 
             tx.commit();
         } catch (Exception e) {
