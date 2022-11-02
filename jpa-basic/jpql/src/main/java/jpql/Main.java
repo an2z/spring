@@ -18,9 +18,12 @@ public class Main {
             em.persist(member);
 
             /**
-             * 임베디드 프로젝션
+             * 스칼라 타입 프로젝션
              */
-            em.createQuery("select o.address from Order o", Address.class).getResultList();
+            em.createQuery("select m.username, m.age from Member m").getResultList();
+
+            // distinct 키워드를 사용해 중복을 제거할 수 있다.
+            em.createQuery("select distinct m.username, m.age from Member m").getResultList();
 
             tx.commit();
         } catch (Exception e) {
