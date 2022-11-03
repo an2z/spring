@@ -1,6 +1,7 @@
 package jpql;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,12 +18,16 @@ public class Main {
             member.setAge(10);
             em.persist(member);
 
-            // 파라미터 바인딩 (이름 기)
-            Member result = em.createQuery("select m from Member m where m.username = :username", Member.class)
-                    .setParameter("username", "member")
-                    .getSingleResult();
+            /**
+             * 스칼라 타입 프로젝션
+             * 여러 값을 조회하는 방법 → new 명령어로 조회
+             */
+            List<MemberDto> resultList = em.createQuery("select new jpql.MemberDto(m.username, m.age) from Member m", MemberDto.class)
+                    .getResultList();
 
-            System.out.println("result.username = " + result.getUsername());
+            MemberDto memberDto = resultList.get(0);
+            System.out.println("username = " + memberDto.getUsername());
+            System.out.println("age = " + memberDto.getAge());
 
             tx.commit();
         } catch (Exception e) {
