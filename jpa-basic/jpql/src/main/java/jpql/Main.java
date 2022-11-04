@@ -28,10 +28,8 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m left join m.team t";
+            String query = "select m from Member m, Team t where m.username = t.name";
             List<Member> result = em.createQuery(query, Member.class)
-                    .setFirstResult(0)
-                    .setMaxResults(5)
                     .getResultList();
 
             tx.commit();
