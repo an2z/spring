@@ -13,22 +13,22 @@ public class Main {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("A");
-            member.setAge(10);
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setAge(10);
 
-            em.persist(member);
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setAge(20);
 
-            Team team = new Team();
-            team.setName("A");
-            team.addMember(member);
-
-            em.persist(team);
+            em.persist(member1);
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            String query = "select m from Member m left join Team t on m.username = t.name";
+            // 나이가 평균보다 많은 회원 조회
+            String query = "select m from Member m where m.age > (select avg(m2.age) from Member m2)";
             List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
