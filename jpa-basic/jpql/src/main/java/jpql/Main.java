@@ -13,21 +13,23 @@ public class Main {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("member");
-            member.setAge(10);
-            em.persist(member);
+            for (int i = 0; i <= 50; i++) {
+                Member member = new Member();
+                member.setUsername("member" + i);
+                member.setAge(i);
+                em.persist(member);
+            }
 
-            /**
-             * 스칼라 타입 프로젝션
-             * 여러 값을 조회하는 방법 → new 명령어로 조회
-             */
-            List<MemberDto> resultList = em.createQuery("select new jpql.MemberDto(m.username, m.age) from Member m", MemberDto.class)
+            List<Member> result = em.createQuery("select m from Member m order by m.age desc", Member.class)
+                    .setFirstResult(0) // 0번째 부터
+                    .setMaxResults(10) // 10개를 가져오겠다
                     .getResultList();
 
-            MemberDto memberDto = resultList.get(0);
-            System.out.println("username = " + memberDto.getUsername());
-            System.out.println("age = " + memberDto.getAge());
+            System.out.println("result.size() = " + result.size());
+
+            for (Member member1 : result) {
+                System.out.println(member1);
+            }
 
             tx.commit();
         } catch (Exception e) {
