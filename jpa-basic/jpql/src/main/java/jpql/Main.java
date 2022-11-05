@@ -14,13 +14,13 @@ public class Main {
 
         try {
             Member member = new Member();
-            member.setUsername("member1");
+            member.setUsername("A");
             member.setAge(10);
 
             em.persist(member);
 
             Team team = new Team();
-            team.setName("teamA");
+            team.setName("A");
             team.addMember(member);
 
             em.persist(team);
@@ -28,7 +28,7 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m left join m.team t on t.name = 'teamA'";
+            String query = "select m from Member m left join Team t on m.username = t.name";
             List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
