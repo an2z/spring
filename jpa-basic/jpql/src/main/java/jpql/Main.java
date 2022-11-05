@@ -28,9 +28,11 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m, Team t where m.username = t.name";
+            String query = "select m from Member m left join m.team t on t.name = 'teamA'";
             List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
+
+            System.out.println("result = " + result);
 
             tx.commit();
         } catch (Exception e) {
