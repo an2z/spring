@@ -13,23 +13,26 @@ public class Main {
         tx.begin();
 
         try {
-            for (int i = 0; i <= 50; i++) {
-                Member member = new Member();
-                member.setUsername("member" + i);
-                member.setAge(i);
-                em.persist(member);
-            }
+            Member member = new Member();
+            member.setUsername("A");
+            member.setAge(10);
 
-            List<Member> result = em.createQuery("select m from Member m order by m.age desc", Member.class)
-                    .setFirstResult(0) // 0번째 부터
-                    .setMaxResults(10) // 10개를 가져오겠다
+            em.persist(member);
+
+            Team team = new Team();
+            team.setName("A");
+            team.addMember(member);
+
+            em.persist(team);
+
+            em.flush();
+            em.clear();
+
+            String query = "select m from Member m left join Team t on m.username = t.name";
+            List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
-            System.out.println("result.size() = " + result.size());
-
-            for (Member member1 : result) {
-                System.out.println(member1);
-            }
+            System.out.println("result = " + result);
 
             tx.commit();
         } catch (Exception e) {
