@@ -48,7 +48,12 @@ public class Main {
             String query1 = "select m from Member m where exists (select t from m.team t where t.name = 'A')";
             List<Member> result1 = em.createQuery(query1, Member.class).getResultList();
 
+            // 어떤 팀이든 팀에 소속된 회원 조회 -> ANY
+            String query2 = "select m from Member m where m.team = any (select t from Team t)";
+            List<Member> result2 = em.createQuery(query2, Member.class).getResultList();
+
             System.out.println("result1 = " + result1);
+            System.out.println("result2 = " + result2);
 
             tx.commit();
         } catch (Exception e) {
