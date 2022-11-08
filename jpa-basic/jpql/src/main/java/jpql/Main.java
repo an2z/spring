@@ -19,7 +19,7 @@ public class Main {
 
         try {
             Member member = new Member();
-            member.setUsername("member");
+            member.setUsername(null);
             member.setAge(10);
             member.setType(ADMIN);
 
@@ -34,18 +34,11 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query =
-                    "select " +
-                        "case t.name " +
-                            "when '팀A' then '인센티브110%' " +
-                            "when '팀B' then '인센티브120%' " +
-                            "else '인센티브105%' " +
-                        "end " +
-                    "from Team t";
+            String query = "select coalesce(m.username, '이름 없는 회원') from Member m";
             List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (String s : result) {
-                System.out.println("s = " + s); // 학생 요금
+                System.out.println("s = " + s); // 이름 없는 회원
             }
 
             tx.commit();
