@@ -35,8 +35,10 @@ public class Main {
             em.clear();
 
             String query = "select m.username, true, 'HELLO' from Member m " +
-                    "where m.type = jpql.MemberType.ADMIN";
-            List<Object[]> result = em.createQuery(query).getResultList();
+                    "where m.type = :userType";
+            List<Object[]> result = em.createQuery(query)
+                    .setParameter("userType", MemberType.ADMIN)
+                    .getResultList();
 
             for (Object[] objects : result) {
                 System.out.println("objects[0] = " + objects[0]);
