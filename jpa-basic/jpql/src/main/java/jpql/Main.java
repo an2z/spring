@@ -26,7 +26,7 @@ public class Main {
             em.persist(member);
 
             Team teamA = new Team();
-            teamA.setName("A");
+            teamA.setName("팀A");
             teamA.addMember(member);
 
             em.persist(teamA);
@@ -36,11 +36,12 @@ public class Main {
 
             String query =
                     "select " +
-                        "case when m.age <= 10 then '학생요금' " +
-                        "     when m.age >= 60 then '경로요금' " +
-                        "     else '일반요금' " +
+                        "case t.name " +
+                            "when '팀A' then '인센티브110%' " +
+                            "when '팀B' then '인센티브120%' " +
+                            "else '인센티브105%' " +
                         "end " +
-                    "from Member m";
+                    "from Team t";
             List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (String s : result) {
