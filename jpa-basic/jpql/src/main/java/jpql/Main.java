@@ -34,7 +34,8 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select m.username, true, 'HELLO' from Member m";
+            String query = "select m.username, true, 'HELLO' from Member m " +
+                    "where m.type = jpql.MemberType.ADMIN";
             List<Object[]> result = em.createQuery(query).getResultList();
 
             for (Object[] objects : result) {
