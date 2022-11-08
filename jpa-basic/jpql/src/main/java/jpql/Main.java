@@ -34,12 +34,13 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select m.username, true from Member m";
+            String query = "select m.username, true, 'HELLO' from Member m";
             List<Object[]> result = em.createQuery(query).getResultList();
 
             for (Object[] objects : result) {
                 System.out.println("objects[0] = " + objects[0]);
                 System.out.println("objects[1] = " + objects[1]);
+                System.out.println("objects[2] = " + objects[2]);
             }
 
             tx.commit();
