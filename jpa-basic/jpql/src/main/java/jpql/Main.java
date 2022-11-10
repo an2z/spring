@@ -34,11 +34,11 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select trim(' 가 나다 ') from Member m";
-            List<String> result = em.createQuery(query, String.class).getResultList();
+            String query = "select length('가나다') from Member m";
+            List<Integer> result = em.createQuery(query, Integer.class).getResultList();
 
-            for (String s : result) {
-                System.out.println("s = " + s); // 가 나다
+            for (Integer s : result) {
+                System.out.println("s = " + s); // 3
             }
 
             tx.commit();
