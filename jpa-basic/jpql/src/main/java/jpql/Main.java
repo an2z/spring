@@ -34,11 +34,11 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select concat('a', 'b') from Member m";
+            String query = "select substring(m.username, 1, 2) from Member m";
             List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (String s : result) {
-                System.out.println("s = " + s); // ab
+                System.out.println("s = " + s); // 관리
             }
 
             tx.commit();
