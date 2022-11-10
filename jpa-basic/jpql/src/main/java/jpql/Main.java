@@ -19,7 +19,7 @@ public class Main {
 
         try {
             Member member = new Member();
-            member.setUsername("관리자");
+            member.setUsername("jolly");
             member.setAge(10);
             member.setType(ADMIN);
 
@@ -34,11 +34,11 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select substring(m.username, 1, 2) from Member m";
+            String query = "select upper(m.username) from Member m";
             List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (String s : result) {
-                System.out.println("s = " + s); // 관리
+                System.out.println("s = " + s); // JOLLY
             }
 
             tx.commit();
