@@ -34,11 +34,11 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select nullif(m.username, '관리자') from Member m";
+            String query = "select concat('a', 'b') from Member m";
             List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (String s : result) {
-                System.out.println("s = " + s); // null
+                System.out.println("s = " + s); // ab
             }
 
             tx.commit();
