@@ -1,7 +1,5 @@
 package jpql;
 
-import static jpql.MemberType.ADMIN;
-
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,27 +16,24 @@ public class Main {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("jolly");
-            member.setAge(10);
-            member.setType(ADMIN);
+            Member member1 = new Member();
+            member1.setUsername("jolly");
 
-            em.persist(member);
+            Member member2 = new Member();
+            member2.setUsername("molly");
 
-            Team teamA = new Team();
-            teamA.setName("팀A");
-            teamA.addMember(member);
-
-            em.persist(teamA);
+            em.persist(member1);
+            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            String query = "select size(t.members) from Team t";
-            List<Integer> result = em.createQuery(query, Integer.class).getResultList();
+            String query1 = "select function('group_concat', m.username) from Member m";
+            String query2 = "select gruop_concat(m.username) from Member m";
+            List<String> result = em.createQuery(query2, String.class).getResultList(); // query1, query2 결과 동일
 
-            for (Integer s : result) {
-                System.out.println("s = " + s); // 1
+            for (String s : result) {
+                System.out.println("s = " + s); // jolly,molly
             }
 
             tx.commit();
