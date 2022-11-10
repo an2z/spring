@@ -19,14 +19,14 @@ public class Main {
 
         try {
             Member member = new Member();
-            member.setUsername("member");
+            member.setUsername("관리자");
             member.setAge(10);
             member.setType(ADMIN);
 
             em.persist(member);
 
             Team teamA = new Team();
-            teamA.setName("A");
+            teamA.setName("팀A");
             teamA.addMember(member);
 
             em.persist(teamA);
@@ -34,16 +34,11 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query = "select m.username, true, 'HELLO' from Member m " +
-                    "where m.type = :userType";
-            List<Object[]> result = em.createQuery(query)
-                    .setParameter("userType", MemberType.ADMIN)
-                    .getResultList();
+            String query = "select nullif(m.username, '관리자') from Member m";
+            List<String> result = em.createQuery(query, String.class).getResultList();
 
-            for (Object[] objects : result) {
-                System.out.println("objects[0] = " + objects[0]);
-                System.out.println("objects[1] = " + objects[1]);
-                System.out.println("objects[2] = " + objects[2]);
+            for (String s : result) {
+                System.out.println("s = " + s); // null
             }
 
             tx.commit();
