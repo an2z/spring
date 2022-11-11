@@ -28,12 +28,16 @@ public class Main {
             em.flush();
             em.clear();
 
-            String query1 = "select function('group_concat', m.username) from Member m";
-            String query2 = "select gruop_concat(m.username) from Member m";
-            List<String> result = em.createQuery(query2, String.class).getResultList(); // query1, query2 결과 동일
+            /**
+             * 상태 필드
+             * 경로 탐색의 끝, 탐색을 더이상 할 수 없다.
+             * 예) m.username
+             */
+            String query = "select m.username from Member m";
+            List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (String s : result) {
-                System.out.println("s = " + s); // jolly,molly
+                System.out.println("s = " + s);
             }
 
             tx.commit();
