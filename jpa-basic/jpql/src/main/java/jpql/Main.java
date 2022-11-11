@@ -25,15 +25,22 @@ public class Main {
             em.persist(member1);
             em.persist(member2);
 
+            Team teamA = new Team();
+            teamA.setName("A");
+            teamA.addMember(member1);
+            teamA.addMember(member2);
+
+            em.persist(teamA);
+
             em.flush();
             em.clear();
 
             /**
-             * 상태 필드
-             * 경로 탐색의 끝, 탐색을 더이상 할 수 없다.
-             * 예) m.username
+             * 단일 값 연관 경로
+             * 묵시적 내부 조인이 발생하며, 계속 탐색할 수 있다.
+             * 예) m.team.(name, id 등)
              */
-            String query = "select m.username from Member m";
+            String query = "select m.team.name from Member m";
             List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (String s : result) {
