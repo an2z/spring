@@ -1,26 +1,39 @@
 package src.fire.ch10;
 
-/* Ŭ���� �޼ҵ� */
-class StaticMethodExam00 {
-	private int num = 0;
-	
-	static void showInt(int n) { System.out.println(n); }        // Ŭ���� �޼ҵ� (static �޼ҵ�)
-	static void showDouble(double n) { System.out.println(n); }  // Ŭ���� �޼ҵ�
-	
-	void setNum(int n) { num = n; }   // �ν��Ͻ� �޼ҵ�
-	void showNum() {  // �ν��Ͻ� �޼ҵ�
-		showInt(num);   // Ŭ���� ���ο��� Ŭ���� �޼ҵ� ȣ��
-	}  
-}
-
-
+/* 클래스 메소드 */
 public class StaticMethodExam {
-	public static void main(String[] args) {
-		StaticMethodExam00.showInt(20);  // Ŭ���� �ܺο��� �ν��Ͻ� �̸��� ���� Ŭ���� �޼ҵ� ȣ��
-		
-		StaticMethodExam00 np = new StaticMethodExam00();  // �ν��Ͻ� ����
-		np.showDouble(3.15);  // Ŭ���� �ܺο��� �ν��Ͻ� �̸��� ���� Ŭ���� �޼ҵ� ȣ��
-		np.setNum(75);
-		np.showNum();	
-	}
+    static class StaticMethodExam00 {
+        private int num = 0;
+
+        // 클래스 메소드 (static 메소드)
+        static void showInt(int n) {
+            System.out.println(n);
+        }
+
+        // 클래스 메소드 (static 메소드)
+        static void showDouble(double n) {
+            System.out.println(n);
+        }
+
+        // 인스턴스 메소드
+        void setNum(int n) {
+            num = n;
+        }
+
+        // 인스턴스 메소드
+        void showNum() {
+            showInt(num); // 클래스 내부에서 클래스 메소드 호출
+        }
+    }
+
+    public static void main(String[] args) {
+        // 클래스 메소드 호출
+        StaticMethodExam00.showInt(20);
+        StaticMethodExam00.showDouble(20.1);
+
+        // 인스턴스 메소드 호출
+        StaticMethodExam00 np = new StaticMethodExam00(); // 인스턴스 생성
+        np.setNum(75);
+        np.showNum();
+    }
 }
