@@ -8,8 +8,8 @@ class FruitBoxFaultAfterGeneric {
         Box<Apple> aBox = new Box<Apple>();
         Box<Orange> oBox = new Box<Orange>();
 
-        aBox.set("Apple"); // 프로그래머의 실수가 컴파일 오류로 이어짐
-        oBox.set("Orange"); // 프로그래머의 실수가 컴파일 오류로 이어짐
+        // aBox.set("Apple"); // 프로그래머의 실수가 컴파일 오류로 이어짐
+        //oBox.set("Orange"); // 프로그래머의 실수가 컴파일 오류로 이어짐
 
         Apple ap = aBox.get();
         Orange or = oBox.get();
