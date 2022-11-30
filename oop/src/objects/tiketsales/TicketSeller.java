@@ -9,7 +9,7 @@ public class TicketSeller {
 
     public void sell(Audience audience) {
         Ticket ticket = ticketOffice.getTicket();
-        ticketOffice.minusMoney(audience.buy(ticket));
+        ticketOffice.plusMoney(audience.buy(ticket));
     }
 }
 
