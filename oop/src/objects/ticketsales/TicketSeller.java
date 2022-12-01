@@ -1,4 +1,4 @@
-package objects.tiketsales;
+package objects.ticketsales;
 
 public class TicketSeller {
     private TicketOffice ticketOffice;

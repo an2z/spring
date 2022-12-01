@@ -1,4 +1,4 @@
-package objects.tiketsales;
+package objects.ticketsales;
 
 /**
  * 공연을 관람하기 위한 티켓

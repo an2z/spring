@@ -1,4 +1,4 @@
-package objects.tiketsales;
+package objects.ticketsales;
 
 /**
  * 관람객이 소지품을 보관할 가방

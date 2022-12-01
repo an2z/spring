@@ -1,4 +1,4 @@
-package objects.tiketsales;
+package objects.ticketsales;
 
 import java.util.ArrayList;
 import java.util.Arrays;

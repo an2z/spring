@@ -1,4 +1,4 @@
-package objects.tiketsales;
+package objects.ticketsales;
 
 /**
  * 소극장
