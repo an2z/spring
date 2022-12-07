@@ -3,7 +3,7 @@ package objects.moviereservation;
 /**
  * 비율 할인 정책
  */
-public class PercentDiscountPolicy extends DiscountPolicy {
+public class PercentDiscountPolicy extends DefaultDiscountPolicy {
     private double percent;
 
     public PercentDiscountPolicy(double percent, DiscountCondition... conditions) {
