@@ -1,6 +1,5 @@
 package jpql;
 
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,10 +38,10 @@ public class Main {
             /**
              * 컬렉션 값 연관 경로
              * 묵시적 내부 조인이 발생하며, 탐색이 불가능하다.
-             * ex) t.members.username (X)
+             * FROM 절에서 명시적 조인을 통해 별칭을 얻으면 별칭을 통해 탐색이 가능하다.
              */
-            String query = "select t.members from Team t";
-            List<Collection> result = em.createQuery(query, Collection.class).getResultList();
+            String query = "select m.username from Team t join t.members m";
+            List<String> result = em.createQuery(query, String.class).getResultList();
 
             for (Object o : result) {
                 System.out.println(o);
