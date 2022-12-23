@@ -25,15 +25,26 @@ public class Main {
             em.persist(member1);
             em.persist(member2);
 
+            Team teamA = new Team();
+            teamA.setName("A");
+            teamA.addMember(member1);
+            teamA.addMember(member2);
+
+            em.persist(teamA);
+
             em.flush();
             em.clear();
 
-            String query1 = "select function('group_concat', m.username) from Member m";
-            String query2 = "select gruop_concat(m.username) from Member m";
-            List<String> result = em.createQuery(query2, String.class).getResultList(); // query1, query2 결과 동일
+            /**
+             * 컬렉션 값 연관 경로
+             * 묵시적 내부 조인이 발생하며, 탐색이 불가능하다.
+             * FROM 절에서 명시적 조인을 통해 별칭을 얻으면 별칭을 통해 탐색이 가능하다.
+             */
+            String query = "select m.username from Team t join t.members m";
+            List<String> result = em.createQuery(query, String.class).getResultList();
 
-            for (String s : result) {
-                System.out.println("s = " + s); // jolly,molly
+            for (Object o : result) {
+                System.out.println(o);
             }
 
             tx.commit();
