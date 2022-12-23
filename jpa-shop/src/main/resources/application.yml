@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:h2:tcp://localhost/~/jpashop
     username: sa
-    password:
+    password: jpashop
     driver-class-name: org.h2.Driver
   output:
     ansi:
@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create # 자동으로 테이블을 만들어주는 모드
+    ddl-auto: none
     properties:
       hibernate:
 #        show_spl: true
