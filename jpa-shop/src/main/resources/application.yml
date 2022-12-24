@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:h2:tcp://localhost/~/jpashop
     username: sa
-    password: jpashop
+    password:
     driver-class-name: org.h2.Driver
   output:
     ansi:
@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-    ddl-auto: none
+      ddl-auto: create # (DROP + CREATE)
     properties:
       hibernate:
 #        show_spl: true
