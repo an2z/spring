@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository;
+package jpabook.jpashop.repository.order.simplequery;
 
 import java.time.LocalDateTime;
 import jpabook.jpashop.domain.Address;
@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class OrderSimpleQueryDto {
+
     private Long orderId;
     private String name;
     private LocalDateTime orderDate;
@@ -20,4 +21,5 @@ public class OrderSimpleQueryDto {
         this.orderStatus = orderStatus;
         this.address = address;
     }
+
 }
