@@ -1,13 +1,12 @@
 package jpabook.jpashop.repository;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -63,4 +62,11 @@ public class OrderRepository {
         return query.getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o"
+                        + " join fetch o.member m"
+                        + " join fetch o.delivery d", Order.class
+        ).getResultList();
+    }
 }
