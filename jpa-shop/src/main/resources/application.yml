@@ -13,9 +13,10 @@ spring:
       ddl-auto: create # (DROP + CREATE)
     properties:
       hibernate:
-        #        show_spl: true
+        # show_spl: true
         format_sql: true
         default_batch_fetch_size: 100
+    # open-in-view: false
 
 logging:
   level:
