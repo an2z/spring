@@ -1,6 +1,7 @@
 package objects.moviereservation.v2;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Movie {
@@ -27,6 +28,22 @@ public class Movie {
 
     public void setDiscountConditions(List<DiscountCondition> discountConditions) {
         this.discountConditions = discountConditions;
+    }
+
+    public boolean isDiscountable(LocalDateTime whenScreened, int sequence) {
+        for (DiscountCondition condition : discountConditions) {
+            if (condition.getType() == DiscountConditionType.PERIOD) {
+                if (condition.isDiscountable(whenScreened.getDayOfWeek(), whenScreened.toLocalTime())) {
+                    return true;
+                }
+            } else {
+                if (condition.isDiscountable(sequence)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public MovieType getMovieType() {
