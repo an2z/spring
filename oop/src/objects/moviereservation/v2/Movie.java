@@ -14,22 +14,6 @@ public class Movie {
     private Money discountAmount;
     private double discountPercent;
 
-    public Money getFee() {
-        return fee;
-    }
-
-    public void setFee(Money fee) {
-        this.fee = fee;
-    }
-
-    public List<DiscountCondition> getDiscountConditions() {
-        return discountConditions;
-    }
-
-    public void setDiscountConditions(List<DiscountCondition> discountConditions) {
-        this.discountConditions = discountConditions;
-    }
-
     public boolean isDiscountable(LocalDateTime whenScreened, int sequence) {
         for (DiscountCondition condition : discountConditions) {
             if (condition.getType() == DiscountConditionType.PERIOD) {
@@ -44,10 +28,6 @@ public class Movie {
         }
 
         return false;
-    }
-
-    public MovieType getMovieType() {
-        return movieType;
     }
 
     public Money calculateAmountDiscountedFee() {
@@ -72,6 +52,26 @@ public class Movie {
         }
 
         return fee;
+    }
+
+    public Money getFee() {
+        return fee;
+    }
+
+    public void setFee(Money fee) {
+        this.fee = fee;
+    }
+
+    public List<DiscountCondition> getDiscountConditions() {
+        return discountConditions;
+    }
+
+    public void setDiscountConditions(List<DiscountCondition> discountConditions) {
+        this.discountConditions = discountConditions;
+    }
+
+    public MovieType getMovieType() {
+        return movieType;
     }
 
     public void setMovieType(MovieType movieType) {
