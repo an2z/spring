@@ -1,4 +1,4 @@
-package objects.moviereservation;
+package objects.moviereservation.v1;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;

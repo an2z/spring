@@ -1,4 +1,4 @@
-package objects.moviereservation;
+package objects.moviereservation.v1;
 
 /**
  * 비율 할인 정책
