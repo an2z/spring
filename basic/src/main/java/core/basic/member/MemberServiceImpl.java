@@ -2,7 +2,7 @@ package core.basic.member;
 
 public class MemberServiceImpl implements MemberService {
 
-    MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository = new MemoryMemberRepository();
 
     @Override
     public void join(Member member) {
