@@ -1,4 +1,4 @@
-package singleton;
+package core.basic.singleton;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

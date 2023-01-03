@@ -1,4 +1,4 @@
-package beandefinition;
+package core.basic.beandefinition;
 
 import core.basic.AppConfig;
 import org.junit.jupiter.api.DisplayName;

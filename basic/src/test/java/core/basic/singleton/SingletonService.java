@@ -1,4 +1,4 @@
-package singleton;
+package core.basic.singleton;
 
 public class SingletonService {
     // static 영역에 객체를 미리 하나 생성해둔다.

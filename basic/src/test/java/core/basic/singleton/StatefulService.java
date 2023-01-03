@@ -1,4 +1,4 @@
-package singleton;
+package core.basic.singleton;
 
 public class StatefulService {
     private int price; // 공유 필드 (상태 유지)
