@@ -1,5 +1,6 @@
 package core.basic.order;
 
+import core.basic.annotation.MainDiscountPolicy;
 import core.basic.discount.DiscountPolicy;
 import core.basic.member.Member;
 import core.basic.member.MemberRepository;
@@ -12,7 +13,8 @@ public class OrderServiceImpl implements OrderService {
     private final DiscountPolicy discountPolicy;
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository,
+                            @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
