@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -42,10 +42,10 @@ class SingletonWithPrototypeTest {
     @Scope("singleton")
     @RequiredArgsConstructor
     static class ClientBean {
-        private final ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        private final Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic() {
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
