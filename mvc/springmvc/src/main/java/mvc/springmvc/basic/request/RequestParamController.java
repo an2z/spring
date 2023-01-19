@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
+import mvc.springmvc.basic.HelloData;
 
 @Slf4j
 @Controller
@@ -97,6 +99,31 @@ public class RequestParamController {
 	@RequestMapping("/request-param-map")
 	public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
 		log.info("username = {}, age = {}", paramMap.get("username"), paramMap.get("age"));
+		return "ok";
+	}
+
+	/**
+	 * @ModelAttribute 사용
+	 * 요청 파라미터가 하나의 객체가 되어야 하는 경우 사용
+	 */
+	@ResponseBody
+	@RequestMapping("/model-attribute-v1")
+	public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+		log.info("username = {}, age = {}", helloData.getUsername(), helloData.getAge());
+		log.info("helloData = {}", helloData);
+		return "ok";
+	}
+
+	/**
+	 * @ModelAttribute 생략 가능
+	 * String, int 같은 단순 타입 = @RequestParam
+	 * argument resolver 로 지정해둔 타입 외 = @ModelAttribute
+	 */
+	@ResponseBody
+	@RequestMapping("/model-attribute-v2")
+	public String modelAttributeV2(HelloData helloData) {
+		log.info("username = {}, age = {}", helloData.getUsername(), helloData.getAge());
+		log.info("helloData = {}", helloData);
 		return "ok";
 	}
 }
