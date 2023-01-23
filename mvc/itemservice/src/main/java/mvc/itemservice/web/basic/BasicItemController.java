@@ -74,4 +74,16 @@ public class BasicItemController {
         itemRepository.save(item);
         return "basic/item";
     }
+
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findOne(itemId);
+        model.addAttribute("item", item);
+        return "/basic/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, Model mode) {
+        return "";
+    }
 }
