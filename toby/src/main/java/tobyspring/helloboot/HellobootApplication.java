@@ -22,6 +22,7 @@ public class HellobootApplication {
 		WebServer webServer = serverFactory.getWebServer(servletContext -> {
 			GenericApplicationContext applicationContext = new GenericApplicationContext(); // 스프링 컨테이너
 			applicationContext.registerBean(HelloController.class); // 빈 등록
+			applicationContext.registerBean(SimpleHelloService.class);
 			applicationContext.refresh();
 
 			servletContext.addServlet("frontcontroller", new HttpServlet() {
