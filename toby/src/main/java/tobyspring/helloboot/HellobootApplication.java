@@ -18,13 +18,13 @@ import org.springframework.http.MediaType;
 public class HellobootApplication {
 
 	public static void main(String[] args) {
+		GenericApplicationContext applicationContext = new GenericApplicationContext(); // 스프링 컨테이너
+		applicationContext.registerBean(HelloController.class); // 빈 등록
+		applicationContext.registerBean(SimpleHelloService.class);
+		applicationContext.refresh();
+
 		ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
 		WebServer webServer = serverFactory.getWebServer(servletContext -> {
-			GenericApplicationContext applicationContext = new GenericApplicationContext(); // 스프링 컨테이너
-			applicationContext.registerBean(HelloController.class); // 빈 등록
-			applicationContext.registerBean(SimpleHelloService.class);
-			applicationContext.refresh();
-
 			servletContext.addServlet("frontcontroller", new HttpServlet() {
 				@Override
 				protected void service(HttpServletRequest req, HttpServletResponse resp)
