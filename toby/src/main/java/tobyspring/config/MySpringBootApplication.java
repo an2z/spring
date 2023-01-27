@@ -12,6 +12,5 @@ import org.springframework.context.annotation.Configuration;
 @Target(ElementType.TYPE) // (class, interface, enum)
 @Configuration
 @ComponentScan
-public @interface MySpringBootAnnotation {
-
+public @interface MySpringBootApplication {
 }
