@@ -1,4 +1,4 @@
-package src.grammar;
+package src.grammar.stream;
 
 import java.util.List;
 import java.util.stream.Collectors;

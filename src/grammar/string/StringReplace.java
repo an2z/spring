@@ -1,4 +1,4 @@
-package src.grammar;
+package src.grammar.string;
 
 public class StringReplace {
     public static void main(String[] args) {
