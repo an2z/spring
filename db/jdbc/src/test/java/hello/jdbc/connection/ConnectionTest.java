@@ -4,6 +4,7 @@ import static hello.jdbc.connection.ConnectionConst.PASSWORD;
 import static hello.jdbc.connection.ConnectionConst.URL;
 import static hello.jdbc.connection.ConnectionConst.USERNAME;
 
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -27,6 +28,21 @@ class ConnectionTest {
         // DriverManagerDataSource - 항상 새로운 커넥션 획득
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD); // DataSource 설정
         useDataSource(dataSource);
+    }
+
+    @Test
+    void dataSourceConnectionPool() throws SQLException, InterruptedException {
+        // 커넥션 풀링
+        HikariDataSource dataSource = new HikariDataSource();
+
+        dataSource.setJdbcUrl(URL);
+        dataSource.setUsername(USERNAME);
+        dataSource.setPassword(PASSWORD);
+        dataSource.setMaximumPoolSize(10);
+        dataSource.setPoolName("MyPool");
+
+        useDataSource(dataSource);
+        Thread.sleep(1000); // 쓰레드 풀에 커넥션이 생성되는 로그 확인을 위함
     }
 
     private void useDataSource(DataSource dataSource) throws SQLException {
