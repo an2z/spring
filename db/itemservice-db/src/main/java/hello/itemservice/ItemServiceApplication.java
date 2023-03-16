@@ -2,14 +2,12 @@ package hello.itemservice;
 
 import hello.itemservice.config.JdbcTemplateV3Config;
 import hello.itemservice.repository.ItemRepository;
-import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Slf4j
 //@Import(MemoryConfig.class)
@@ -29,6 +27,7 @@ public class ItemServiceApplication {
         return new TestDataInit(itemRepository);
     }
 
+/*
     @Bean
     @Profile("test")
     public DataSource dataSource() {
@@ -40,4 +39,5 @@ public class ItemServiceApplication {
         dataSource.setPassword("");
         return dataSource;
     }
+*/
 }
