@@ -1,7 +1,6 @@
 package movie;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Movie {
@@ -20,19 +19,24 @@ public class Movie {
         this.runningTime = runningTime;
     }
 
-    public boolean isDiscountable(LocalDateTime whenScreened, int sequence) {
-        for (DiscountCondition condition : discountConditions) {
-            if (condition.getType() == DiscountConditionType.PERIOD) {
-                if (condition.isDiscountable(whenScreened.getDayOfWeek(), whenScreened)) {
-                    return true;
-                }
-            } else {
-                if (condition.isDiscountable(sequence)) {
-                    return true;
-                }
-            }
+    public Money calculateMovieFee(Screening screening) {
+        if (isDiscountable(screening)) {
+            return fee.minus(calculateDiscountAmount());
         }
-        return false;
+        return fee;
+    }
+
+    private boolean isDiscountable(Screening screening) {
+        return discountConditions.stream()
+                .anyMatch(condition -> condition.isSatisfiedBy(screening));
+    }
+
+    private Money calculateDiscountAmount() {
+        return switch (movieType) {
+            case AMOUNT_DISCOUNT -> calculateAmountDiscountedFee();
+            case PERCENT_DISCOUNT -> calculatePercentDiscountedFee();
+            case NONE_DISCOUNT -> calculatedNoneDiscountedFee();
+        };
     }
 
     public Money calculateAmountDiscountedFee() {
@@ -54,9 +58,5 @@ public class Movie {
             throw new IllegalArgumentException();
         }
         return fee;
-    }
-
-    public MovieType getMovieType() {
-        return movieType;
     }
 }

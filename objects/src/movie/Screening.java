@@ -14,22 +14,20 @@ public class Screening {
         this.whenScreened = whenScreened;
     }
 
+    public Reservation reserve(Customer customer, int audienceCount) {
+        Money fee = calculateFee(audienceCount);
+        return new Reservation(customer, this, fee, audienceCount);
+    }
+
     public Money calculateFee(int audienceCount) {
-        switch (movie.getMovieType()) {
-            case AMOUNT_DISCOUNT -> {
-                if (movie.isDiscountable(whenScreened, sequence)) {
-                    return movie.calculateAmountDiscountedFee().times(audienceCount);
-                }
-            }
-            case PERCENT_DISCOUNT -> {
-                if (movie.isDiscountable(whenScreened, sequence)) {
-                    return movie.calculatePercentDiscountedFee().times(audienceCount);
-                }
-            }
-            case NONE_DISCOUNT -> {
-                return movie.calculatedNoneDiscountedFee().times(audienceCount);
-            }
-        }
-        return movie.calculatedNoneDiscountedFee().times(audienceCount);
+        return movie.calculateMovieFee(this).times(audienceCount);
+    }
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public LocalDateTime getWhenScreened() {
+        return whenScreened;
     }
 }
