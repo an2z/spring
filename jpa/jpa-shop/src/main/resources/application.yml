@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jpashop
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  output:
+    ansi:
+      enabled: always
+
+  jpa:
+    hibernate:
+      ddl-auto: create # (DROP + CREATE)
+    properties:
+      hibernate:
+        # show_spl: true
+        format_sql: true
+        default_batch_fetch_size: 100
+    # open-in-view: false
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace # 쿼리 파라미터 로그 남기기
